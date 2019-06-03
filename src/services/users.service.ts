@@ -24,7 +24,7 @@ export class UsersService {
 
   setUser(user: IUser): void {
     const usersRef = this.db.list('users');
-    usersRef.update(`${user.id}`, { checked: user.checked});
+    usersRef.update(`${user.key}`, { checked: user.checked});
   }
 
   getCheckedUsers(users: IUser[]): string[] {
