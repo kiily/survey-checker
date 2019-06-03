@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
-import { IUser } from '../../../classes/user';
+import { IUser } from '../../../interfaces/user.interface';
 
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
-import { IUser } from '../classes/user';
+import { IUser } from '../interfaces/user.interface';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit {
   selectedUser: IUser;
   users: IUser[];
+  checkedUsers: string[];
 
   constructor(private usersService: UsersService) {}
 
@@ -18,12 +19,18 @@ export class AppComponent implements OnInit {
     this.usersService.getUsers().subscribe( users => this.users = users);
   }
 
-  onUserSelected(selectedUser: IUser) {
+  onUserSelected(selectedUser: IUser): void {
     this.selectedUser = selectedUser;
   }
 
-  onCheck() {
+  onCheck(): void {
     this.selectedUser = {... this.selectedUser, checked: true};
     this.usersService.setUser(this.selectedUser);
   }
+
+  getCheckedUsers(users: IUser[]): void {
+    this.checkedUsers = this.usersService.getCheckedUsers(users);
+  }
+
+
 }

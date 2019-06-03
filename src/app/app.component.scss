@@ -9,14 +9,24 @@
     color: white;
     padding: 20px;
     font-size: 24px;
+    &.check-users {
+        align-self: center;
+    }
 }
 
 .app-container {
     padding: 20px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
-    .flex {
-        flex: 1;
+
+    .check-users {
+        margin-top: 100px;
+    }
+    .users-container {
+        font-size: 20px;
+        text-align: center;
+        margin-top: 10px;
     }
 }

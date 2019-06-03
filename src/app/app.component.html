@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="app-container">
   
-  <app-user-form-component class="flex" [users]="users" (userSelected)="onUserSelected($event)"></app-user-form-component>
+  <app-user-form-component [users]="users" (userSelected)="onUserSelected($event)"></app-user-form-component>
 
   <div *ngIf="selectedUser" class="selected-user">
     Selected user:  {{selectedUser.name}}
@@ -14,6 +14,18 @@
   <div *ngIf="!selectedUser?.checked && selectedUser?.name" class="selected-user">
       <button class="submit" (click)="onCheck()">Click here to consent to providing your mail address to our survey</button>
   </div>
+
+  <button class="check-users submit"(click)="getCheckedUsers(users)">Show verified users</button>
+  <ng-template [ngIf]="checkedUsers">
+    <h1>List of verified users</h1>
+    <div class="users-container">
+      <div *ngFor="let name of checkedUsers">
+        <div class="user-name">
+          {{name}}
+        </div>
+      </div>
+    </div>
+  </ng-template >
    
 </div>
 
