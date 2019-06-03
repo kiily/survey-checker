@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { IUser } from '../interfaces/user.interface';
 import { Observable } from 'rxjs';
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnChanges {
   selectedUser: IUser;
   users: IUser[];
   checkedUsers: string[];
@@ -16,7 +16,16 @@ export class AppComponent implements OnInit {
   constructor(private usersService: UsersService) {}
 
   ngOnInit() {
-    this.usersService.getUsers().subscribe( users => this.users = users);
+    this.usersService.getUsers().subscribe( users => {
+        return this.users = users;
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.users) {
+      const users = this.users;
+      this.getCheckedUsers(users);
+    }
   }
 
   onUserSelected(selectedUser: IUser): void {

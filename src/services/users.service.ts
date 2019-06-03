@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IUser } from '../interfaces/user.interface';
 
 @Injectable({
@@ -10,7 +11,15 @@ export class UsersService {
   constructor(private db: AngularFireDatabase) {}
 
   getUsers(): Observable<IUser[]> {
-    return this.db.list<IUser>('users').valueChanges();
+    const usersRef = this.db.list<IUser>('users');
+    return this.db.list<IUser>('users').snapshotChanges().pipe(
+      map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val()}))
+      )
+    );
+  }
+
+  getUserSnapshots() {
+    return this.db.list<IUser>('users').snapshotChanges();
   }
 
   setUser(user: IUser): void {

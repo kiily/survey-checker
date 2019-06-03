@@ -24,7 +24,7 @@ export class UserFormComponentComponent implements AfterViewInit {
       (result) => {
         const userId = result.id;
         if (this.users) {
-          this.selectedUser = this.users.filter(user => user.id == userId)[0];
+          this.selectedUser = this.users.filter(user => user.key == userId)[0];
           this.userSelected.emit(this.selectedUser);
         }
       }
