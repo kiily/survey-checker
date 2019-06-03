@@ -15,6 +15,8 @@ export class UserFormComponentComponent implements AfterViewInit {
 
   @Output() userSelected = new EventEmitter<IUser>();
 
+  selectedUser: IUser;
+
   constructor() {}
 
   ngAfterViewInit() {
@@ -22,8 +24,8 @@ export class UserFormComponentComponent implements AfterViewInit {
       (result) => {
         const userId = result.id;
         if (this.users) {
-          const selectedUser = this.users.filter(user => user.id == userId)[0];
-          this.userSelected.emit(selectedUser);
+          this.selectedUser = this.users.filter(user => user.id == userId)[0];
+          this.userSelected.emit(this.selectedUser);
         }
       }
   );
