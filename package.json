@@ -1,6 +1,7 @@
 {
   "name": "survey-checker",
   "version": "0.0.0",
+  "engines": "10.15.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
