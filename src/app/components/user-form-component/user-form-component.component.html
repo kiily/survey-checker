@@ -1,0 +1,8 @@
+<form #userForm="ngForm">
+  <div class="form-group">
+    <label class="name-label" for="name">Select your name from the dropdown</label>
+    <select class="select-input" [(ngModel)]="user" placeholder="Please choose your name from the list" name="id">
+          <option *ngFor="let user of users" [value]="user.id">{{user?.name}}</option>
+    </select>
+  </div>
+</form>

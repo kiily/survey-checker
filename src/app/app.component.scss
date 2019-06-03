@@ -1,0 +1,22 @@
+.selected-user {
+    margin-top: 40px;
+}
+
+.submit {
+    border-radius: 8px;
+    border: none;
+    background: #04CC99;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+}
+
+.app-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    .flex {
+        flex: 1;
+    }
+}
