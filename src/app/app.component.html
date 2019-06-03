@@ -12,7 +12,22 @@
   </div>
 
   <div *ngIf="!selectedUser?.checked && selectedUser?.name" class="selected-user">
-      <button class="submit" (click)="onCheck()">Click here to consent to providing your mail address to our survey</button>
+      <h4>To all those who participated in the IIAS Study Group on Co-production of Public Services 2019,
+          Hereby I ask your consent to use your e-mail address for the following purposes: <br/>
+          (1) your e-mail address will be shared with the IIAS Study Group on Co-production of Public Services 2019 participants;<br/>
+          (2) your e-mail address will be used to share invitations for future events of the study group. Please scroll down to select your name and tick the box to give your consent.<br/>
+      </h4>
+      <div class="consent-container">
+        <div class="checkbox-container">
+          <input type="checkbox" [(ngModel)]="hasConsented" [value]="hasConsented"/>
+          <span>
+            I hereby declare that the organizer of the IIAS Study Group on Co-production of public services may distribute my e-mail address 
+            to (and only to) the participants of the study group and that the organizer may use my e-mail address to communicate future events
+            of the study group.
+          </span>
+        </div>
+        <button [disabled]="!hasConsented" class="submit" (click)="onCheck()">Consent</button>
+      </div>
   </div>
 
   <button class="check-users submit"(click)="getCheckedUsers(users)">Show verified users</button>

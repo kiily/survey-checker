@@ -12,6 +12,7 @@ export class AppComponent implements OnInit, OnChanges {
   selectedUser: IUser;
   users: IUser[];
   checkedUsers: string[];
+  hasConsented: boolean = false;
 
   constructor(private usersService: UsersService) {}
 

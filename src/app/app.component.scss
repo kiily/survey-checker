@@ -29,4 +29,17 @@
         text-align: center;
         margin-top: 10px;
     }
+    .consent-container {
+        display: flex;
+        flex-direction: column;
+        .checkbox-container {
+            margin-bottom: 20px;
+        }
+        .submit {
+            align-self: center;
+        }
+        button[disabled] {
+            opacity: 0.5;
+        }
+    }
 }
