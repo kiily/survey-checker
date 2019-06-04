@@ -1,8 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { UsersService } from './services/users.service';
 import { IUser } from '../interfaces/user.interface';
-import { Observable } from 'rxjs';
-
+import dayjs from 'dayjs/esm';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -35,7 +34,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   onCheck(): void {
-    this.selectedUser = {... this.selectedUser, checked: true};
+    this.selectedUser = {... this.selectedUser, checked: true, date: dayjs().format('DD/MM/YYYY HH:mm:ss')};
     this.usersService.setUser(this.selectedUser);
   }
 

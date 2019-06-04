@@ -9,6 +9,7 @@
 
   <div *ngIf="selectedUser?.checked" class="selected-user">
     You have consented to providing your email address. Thanks for participarting in our survey.
+    On {{selectedUser.date}}
   </div>
 
   <div *ngIf="!selectedUser?.checked && selectedUser?.name" class="selected-user">
@@ -16,7 +17,7 @@
           Hereby I ask your consent to use your e-mail address for the following purposes: <br/>
           (1) your e-mail address will be shared with the IIAS Study Group on Co-production of Public Services 2019 participants;<br/>
           (2) your e-mail address will be used to share invitations for future events of the study group. Please scroll down to select
-           your name and tick the box to give your consent.<br/>
+          your name and tick the box to give your consent.<br/>
       </h4>
       <div class="consent-container">
         <div class="checkbox-container">
