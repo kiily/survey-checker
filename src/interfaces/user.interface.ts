@@ -1,5 +1,5 @@
 export interface IUser {
-        key: number;
+        key?: number | string;
         name: string;
         checked: boolean;
 }

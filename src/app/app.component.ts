@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { UsersService } from '../services/users.service';
+import { UsersService } from './services/users.service';
 import { IUser } from '../interfaces/user.interface';
 import { Observable } from 'rxjs';
 
@@ -12,16 +12,17 @@ export class AppComponent implements OnInit, OnChanges {
   selectedUser: IUser;
   users: IUser[];
   checkedUsers: string[];
-  hasConsented: boolean = false;
+  hasConsented = false;
 
   constructor(private usersService: UsersService) {}
 
   ngOnInit() {
     this.usersService.getUsers().subscribe( users => {
-        return this.users = users;
+        return this.users = users.sort();
     });
   }
 
+  //TODO: this is not working
   ngOnChanges(changes: SimpleChanges) {
     if (changes.users) {
       const users = this.users;
@@ -40,6 +41,17 @@ export class AppComponent implements OnInit, OnChanges {
 
   getCheckedUsers(users: IUser[]): void {
     this.checkedUsers = this.usersService.getCheckedUsers(users);
+  }
+
+   handleFile(event) {
+    const files = event.target.files;
+    const f = files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = new Uint8Array((e.target as any).result);
+      this.usersService.getUsersFromFile(data);
+    };
+    reader.readAsArrayBuffer(f);
   }
 
 

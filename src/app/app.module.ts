@@ -7,7 +7,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
-import { UsersService } from '../services/users.service';
+import { UsersService } from './services/users.service';
+
 import { UserFormComponentComponent } from './components/user-form-component/user-form-component.component';
 
 @NgModule({

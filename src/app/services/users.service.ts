@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IUser } from '../interfaces/user.interface';
+import { IUser } from '../../interfaces/user.interface';
+import * as XLSX from 'xlsx';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,16 @@ export class UsersService {
       }
       return arr;
     }, []);
+  }
+
+  getUsersFromFile(data: any) {
+    const workbook = XLSX.read(data, {type: 'array'});
+    const json = XLSX.utils.sheet_to_json(workbook.Sheets.Names);
+    for (const user of json) {
+      this.db.list<IUser>('users').push({
+        name: user.Name,
+        checked: false
+      });
+    }
   }
 }
