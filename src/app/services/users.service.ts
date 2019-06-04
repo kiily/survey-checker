@@ -42,7 +42,7 @@ export class UsersService {
     const json = XLSX.utils.sheet_to_json(workbook.Sheets.Names);
     for (const user of json) {
       this.db.list<IUser>('users').push({
-        name: user.Name,
+        name: (user as any).Name,
         checked: false
       });
     }
