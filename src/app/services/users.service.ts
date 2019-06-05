@@ -39,7 +39,9 @@ export class UsersService {
 
   getUsersFromFile(data: any) {
     const workbook = XLSX.read(data, {type: 'array'});
-    const json = XLSX.utils.sheet_to_json(workbook.Sheets.Names);
+    console.log("TCL: UsersService -> getUsersFromFile -> workbook", workbook)
+    const json = XLSX.utils.sheet_to_json(workbook.Sheets.Sheet1);
+    console.log("TCL: UsersService -> getUsersFromFile -> json", json)
     for (const user of json) {
       this.db.list<IUser>('users').push({
         name: (user as any).Name,
