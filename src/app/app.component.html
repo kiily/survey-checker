@@ -1,6 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="app-container">
   
+  <h4>To all those who participated in the IIAS Study Group on Co-production of Public Services 2019,
+    Hereby I ask your consent to use your e-mail address for the following purposes: <br/>
+    (1) your e-mail address will be shared with the IIAS Study Group on Co-production of Public Services 2019 participants;<br/>
+    (2) your e-mail address will be used to share invitations for future events of the study group. 
+    <br/>Pleaseselect your name, tick the box and press the button to give your consent.<br/>
+</h4>
+
   <app-user-form-component [users]="users" (userSelected)="onUserSelected($event)"></app-user-form-component>
 
   <div *ngIf="selectedUser" class="selected-user">
@@ -13,12 +20,6 @@
   </div>
 
   <div *ngIf="!selectedUser?.checked && selectedUser?.name" class="selected-user">
-      <h4>To all those who participated in the IIAS Study Group on Co-production of Public Services 2019,
-          Hereby I ask your consent to use your e-mail address for the following purposes: <br/>
-          (1) your e-mail address will be shared with the IIAS Study Group on Co-production of Public Services 2019 participants;<br/>
-          (2) your e-mail address will be used to share invitations for future events of the study group. Please scroll down to select
-          your name and tick the box to give your consent.<br/>
-      </h4>
       <div class="consent-container">
         <div class="checkbox-container">
           <input type="checkbox" [(ngModel)]="hasConsented" [value]="hasConsented"/>

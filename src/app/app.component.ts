@@ -17,8 +17,14 @@ export class AppComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.usersService.getUsers().subscribe( users => {
-        return this.users = users.sort();
+        return this.users = users.sort(this.sortByName);
     });
+  }
+
+  sortByName(user1, user2) {
+    const name1 = user1.name.toUpperCase();
+    const name2 = user2.name.toUpperCase();
+    return (name1 < name2) ? -1 : (name1 > name2) ? 1 : 0;
   }
 
   //TODO: this is not working
