@@ -31,7 +31,7 @@ export class UsersService {
   getCheckedUsers(users: IUser[]): string[] {
     return users.reduce( (arr, user) => {
       if (user.checked) {
-        arr.push(user.name);
+        arr.push(user);
       }
       return arr;
     }, []);

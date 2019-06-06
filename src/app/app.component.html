@@ -37,9 +37,9 @@
   <ng-template [ngIf]="checkedUsers && false">
     <h1>List of verified users</h1>
     <div class="users-container">
-      <div *ngFor="let name of checkedUsers">
+      <div *ngFor="let user of checkedUsers">
         <div class="user-name">
-          {{name}}
+          {{user.name}} on {{user.date}}
         </div>
       </div>
     </div>
