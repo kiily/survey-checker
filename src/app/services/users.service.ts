@@ -28,7 +28,7 @@ export class UsersService {
     usersRef.update(`${user.key}`, { checked: user.checked, date: user.date});
   }
 
-  getCheckedUsers(users: IUser[]): string[] {
+  getCheckedUsers(users: IUser[]): IUser[] {
     return users.reduce( (arr, user) => {
       if (user.checked) {
         arr.push(user);
@@ -39,14 +39,19 @@ export class UsersService {
 
   getUsersFromFile(data: any) {
     const workbook = XLSX.read(data, {type: 'array'});
-    console.log("TCL: UsersService -> getUsersFromFile -> workbook", workbook)
     const json = XLSX.utils.sheet_to_json(workbook.Sheets.Sheet1);
-    console.log("TCL: UsersService -> getUsersFromFile -> json", json)
     for (const user of json) {
       this.db.list<IUser>('users').push({
         name: (user as any).Name,
         checked: false
       });
     }
+  }
+
+  exportUsersToFile(checkedUsers: IUser[]) {
+    const worksheet = XLSX.utils.json_to_sheet(checkedUsers);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Names');
+    XLSX.writeFile(workbook, 'consented_users.xlsx');
   }
 }

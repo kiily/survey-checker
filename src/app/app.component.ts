@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from './services/users.service';
 import { IUser } from '../interfaces/user.interface';
 import dayjs from 'dayjs/esm';
@@ -7,16 +7,17 @@ import dayjs from 'dayjs/esm';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
   selectedUser: IUser;
   users: IUser[];
-  checkedUsers: string[];
+  checkedUsers: IUser[];
   hasConsented = false;
 
   constructor(private usersService: UsersService) {}
 
   ngOnInit() {
     this.usersService.getUsers().subscribe( users => {
+        this.checkedUsers = this.getCheckedUsers(users)
         return this.users = users.sort(this.sortByName);
     });
   }
@@ -25,14 +26,6 @@ export class AppComponent implements OnInit, OnChanges {
     const name1 = user1.name.toUpperCase();
     const name2 = user2.name.toUpperCase();
     return (name1 < name2) ? -1 : (name1 > name2) ? 1 : 0;
-  }
-
-  //TODO: this is not working
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.users) {
-      const users = this.users;
-      this.getCheckedUsers(users);
-    }
   }
 
   onUserSelected(selectedUser: IUser): void {
@@ -44,8 +37,8 @@ export class AppComponent implements OnInit, OnChanges {
     this.usersService.setUser(this.selectedUser);
   }
 
-  getCheckedUsers(users: IUser[]): void {
-    this.checkedUsers = this.usersService.getCheckedUsers(users);
+  getCheckedUsers(users: IUser[]): IUser[] {
+    return this.usersService.getCheckedUsers(users);
   }
 
    handleFile(event) {
@@ -59,5 +52,17 @@ export class AppComponent implements OnInit, OnChanges {
     reader.readAsArrayBuffer(f);
   }
 
+  getUncheckedUsers(): number {
+    return this.users.length - this.getTotalCheckedUsers();
+  }
+
+  getTotalCheckedUsers(): number {
+    return this.checkedUsers.length;
+  }
+
+  exportToExcel() {
+    alert(`THERE ARE ${this.getUncheckedUsers()} UNCHECKED USERS`);
+    this.usersService.exportUsersToFile(this.checkedUsers);
+  }
 
 }
